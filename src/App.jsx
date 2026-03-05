@@ -11,7 +11,7 @@ import FloatingShapes from './components/FloatingShapes'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white text-[#1E1E1E] relative">
+    <div className="min-h-screen bg-white text-[#1E1E1E] relative overflow-x-hidden">
       <FloatingShapes />
       <Navbar />
       <Hero />

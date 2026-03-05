@@ -50,7 +50,7 @@ const skillGroups = [
 
 export default function Resume() {
   return (
-    <section id="resume" className="py-32 px-6 relative">
+    <section id="resume" className="py-32 px-6 relative overflow-hidden">
       <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-[#F24E1E]/4 rounded-full blur-[120px]" />
 
       <div className="max-w-6xl mx-auto relative z-10">

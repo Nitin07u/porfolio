@@ -58,7 +58,7 @@ export default function Projects() {
   const [expanded, setExpanded] = useState(null)
 
   return (
-    <section id="projects" className="py-32 px-6 relative">
+    <section id="projects" className="py-32 px-6 relative overflow-hidden">
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#1ABCFE]/4 rounded-full blur-[120px]" />
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -101,7 +101,7 @@ export default function Projects() {
           whileInView="show"
           viewport={{ once: true, margin: '-60px' }}
           variants={{ show: { transition: { staggerChildren: 0.1 } } }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-5"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start"
         >
           {projects.map((p) => (
             <motion.div

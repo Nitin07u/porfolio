@@ -54,7 +54,7 @@ const hobbies = [
 
 export default function Hobbies() {
   return (
-    <section id="hobbies" className="py-32 px-6 relative">
+    <section id="hobbies" className="py-32 px-6 relative overflow-hidden">
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#0ACF83]/4 rounded-full blur-[120px] -translate-y-1/2" />
 
       <div className="max-w-6xl mx-auto relative z-10">

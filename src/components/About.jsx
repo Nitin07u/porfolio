@@ -44,7 +44,7 @@ const journey = [
 
 export default function About() {
   return (
-    <section id="about" className="py-32 px-6 relative">
+    <section id="about" className="py-32 px-6 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 w-[600px] h-[400px] -translate-x-1/2 bg-[#A259FF]/4 rounded-full blur-[120px]" />
 
       <div className="max-w-6xl mx-auto relative z-10">
