@@ -7,10 +7,12 @@ import Resume from './components/Resume'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import SectionDivider from './components/SectionDivider'
+import FloatingShapes from './components/FloatingShapes'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[var(--color-surface)] text-[var(--color-text-primary)]">
+    <div className="min-h-screen bg-white text-[#1E1E1E] relative">
+      <FloatingShapes />
       <Navbar />
       <Hero />
       <SectionDivider />

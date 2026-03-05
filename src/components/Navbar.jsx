@@ -37,7 +37,7 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20'
+          ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200/60 shadow-sm'
           : 'bg-transparent'
       }`}
     >
@@ -46,7 +46,7 @@ export default function Navbar() {
           onClick={() => handleClick('hero')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="text-xl font-display font-bold tracking-tight bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent cursor-pointer"
+          className="text-xl font-display font-bold tracking-tight bg-gradient-to-r from-[#F24E1E] to-[#A259FF] bg-clip-text text-transparent cursor-pointer"
         >
           NU.
         </motion.button>
@@ -59,14 +59,14 @@ export default function Navbar() {
               onClick={() => handleClick(link.id)}
               className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors cursor-pointer ${
                 activeSection === link.id
-                  ? 'text-white'
-                  : 'text-gray-400 hover:text-white'
+                  ? 'text-[#1E1E1E]'
+                  : 'text-[#636363] hover:text-[#1E1E1E]'
               }`}
             >
               {activeSection === link.id && (
                 <motion.span
                   layoutId="navPill"
-                  className="absolute inset-0 bg-white/10 rounded-full"
+                  className="absolute inset-0 bg-gray-100 rounded-full"
                   transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                 />
               )}
@@ -77,7 +77,7 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white text-2xl cursor-pointer"
+          className="md:hidden text-[#1E1E1E] text-2xl cursor-pointer"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         >
@@ -92,7 +92,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0a0a0f]/95 backdrop-blur-xl border-t border-white/5 overflow-hidden"
+            className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200/60 overflow-hidden"
           >
             <div className="px-6 py-4 flex flex-col gap-2">
               {navLinks.map((link) => (
@@ -101,8 +101,8 @@ export default function Navbar() {
                   onClick={() => handleClick(link.id)}
                   className={`text-left px-4 py-3 rounded-lg transition-colors cursor-pointer ${
                     activeSection === link.id
-                      ? 'text-white bg-white/10'
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      ? 'text-[#1E1E1E] bg-gray-100'
+                      : 'text-[#636363] hover:text-[#1E1E1E] hover:bg-gray-50'
                   }`}
                 >
                   {link.label}

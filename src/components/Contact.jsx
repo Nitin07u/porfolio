@@ -40,7 +40,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-32 px-6 relative">
-      <div className="absolute bottom-0 left-1/3 w-[500px] h-[400px] bg-indigo-600/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 left-1/3 w-[500px] h-[400px] bg-[#A259FF]/4 rounded-full blur-[120px]" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -53,7 +53,7 @@ export default function Contact() {
           <motion.span
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-purple-400 text-sm font-medium tracking-widest uppercase"
+            className="text-[#1ABCFE] text-sm font-medium tracking-widest uppercase"
           >
             Get in Touch
           </motion.span>
@@ -61,10 +61,10 @@ export default function Contact() {
           <motion.h2
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-4"
+            className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-4 text-[#1E1E1E]"
           >
             Let&apos;s build something{' '}
-            <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#1ABCFE] to-[#0ACF83] bg-clip-text text-transparent">
               together
             </span>
           </motion.h2>
@@ -72,7 +72,7 @@ export default function Contact() {
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-gray-400 text-lg max-w-xl mx-auto"
+            className="text-[#636363] text-lg max-w-xl mx-auto"
           >
             Have a project in mind, a product challenge to solve, or just want to say hi? I&apos;d love to hear from you.
           </motion.p>
@@ -89,7 +89,7 @@ export default function Contact() {
             className="space-y-5"
           >
             <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-              <label htmlFor="contact-name" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="contact-name" className="block text-sm font-medium text-[#1E1E1E] mb-2">
                 Name
               </label>
               <input
@@ -98,13 +98,13 @@ export default function Contact() {
                 required
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-[#1E1E1E] placeholder-gray-400 focus:outline-none focus:border-[#1ABCFE]/50 focus:ring-1 focus:ring-[#1ABCFE]/20 transition-all"
                 placeholder="Your name"
               />
             </motion.div>
 
             <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-              <label htmlFor="contact-email" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="contact-email" className="block text-sm font-medium text-[#1E1E1E] mb-2">
                 Email
               </label>
               <input
@@ -113,13 +113,13 @@ export default function Contact() {
                 required
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-[#1E1E1E] placeholder-gray-400 focus:outline-none focus:border-[#1ABCFE]/50 focus:ring-1 focus:ring-[#1ABCFE]/20 transition-all"
                 placeholder="you@email.com"
               />
             </motion.div>
 
             <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-              <label htmlFor="contact-message" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="contact-message" className="block text-sm font-medium text-[#1E1E1E] mb-2">
                 Message
               </label>
               <textarea
@@ -128,7 +128,7 @@ export default function Contact() {
                 rows={5}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 transition-all resize-none"
+                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-[#1E1E1E] placeholder-gray-400 focus:outline-none focus:border-[#1ABCFE]/50 focus:ring-1 focus:ring-[#1ABCFE]/20 transition-all resize-none"
                 placeholder="Tell me about your project..."
               />
             </motion.div>
@@ -137,7 +137,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={submitted}
-                className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-full hover:shadow-lg hover:shadow-purple-500/25 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+                className="w-full sm:w-auto px-8 py-3.5 bg-[#1E1E1E] text-white font-medium rounded-full hover:shadow-lg hover:shadow-black/10 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
               >
                 {submitted ? (
                   'Message Sent ✓'
@@ -162,18 +162,18 @@ export default function Contact() {
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.5 }}
-              className="p-6 rounded-2xl bg-white/[0.02] border border-white/5"
+              className="p-6 rounded-2xl bg-white border border-gray-100"
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                <div className="w-10 h-10 rounded-xl bg-[#F24E1E]/10 flex items-center justify-center text-[#F24E1E]">
                   <HiOutlineEnvelope className="w-5 h-5" />
                 </div>
-                <span className="font-medium text-white">Email</span>
+                <span className="font-medium text-[#1E1E1E]">Email</span>
               </div>
               {/* PLACEHOLDER: Replace with real email */}
               <a
                 href="mailto:nitin.upadhyaya@email.com"
-                className="text-gray-400 text-sm hover:text-purple-400 transition-colors"
+                className="text-[#636363] text-sm hover:text-[#F24E1E] transition-colors"
               >
                 nitin.upadhyaya@email.com
               </a>
@@ -183,7 +183,7 @@ export default function Contact() {
               variants={fadeUp}
               transition={{ duration: 0.5 }}
             >
-              <h4 className="font-display font-semibold text-white mb-4">Connect</h4>
+              <h4 className="font-display font-semibold text-[#1E1E1E] mb-4">Connect</h4>
               <div className="flex gap-3">
                 {socials.map((s) => (
                   <a
@@ -192,7 +192,7 @@ export default function Contact() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:border-purple-500/30 hover:bg-white/[0.08] transition-all"
+                    className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-[#636363] hover:text-[#1E1E1E] hover:border-gray-200 hover:bg-gray-100 transition-all"
                   >
                     {s.icon}
                   </a>
@@ -203,13 +203,13 @@ export default function Contact() {
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.5 }}
-              className="p-6 rounded-2xl bg-gradient-to-br from-purple-500/5 to-indigo-500/5 border border-purple-500/10"
+              className="p-6 rounded-2xl bg-gradient-to-br from-[#F24E1E]/5 to-[#A259FF]/5 border border-[#F24E1E]/10"
             >
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <p className="text-[#636363] text-sm leading-relaxed">
                 &quot;I believe the best products come from genuine collaboration between design, product, and engineering. 
                 If you share that belief, let&apos;s talk.&quot;
               </p>
-              <p className="text-purple-400 text-sm font-medium mt-3">— Nitin</p>
+              <p className="text-[#F24E1E] text-sm font-medium mt-3">— Nitin</p>
             </motion.div>
           </motion.div>
         </div>

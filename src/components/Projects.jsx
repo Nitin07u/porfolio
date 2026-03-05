@@ -17,7 +17,7 @@ const projects = [
     process: 'Conducted user interviews, mapped workflows, built information architecture, iterated on high-fidelity prototypes in Figma.',
     outcome: 'Reduced task completion time by 35% in usability testing. Clean, scannable layout praised by stakeholders.',
     tools: ['Figma', 'FigJam', 'Maze', 'React'],
-    color: 'from-purple-500/20 to-indigo-500/20',
+    accent: '#F24E1E',
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const projects = [
     process: 'Designed a consumer-friendly UI with progressive disclosure, wallet onboarding flow, and Solidity-based minting contracts.',
     outcome: 'Delivered end-to-end design and smart contract architecture. Prototype tested with 20+ users for flow validation.',
     tools: ['Figma', 'Solidity', 'Ethers.js', 'Tailwind CSS'],
-    color: 'from-violet-500/20 to-fuchsia-500/20',
+    accent: '#A259FF',
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const projects = [
     process: 'Defined user personas, designed priority-based task flows, built interactive prototypes with micro-animations.',
     outcome: 'Achieved 92% task success rate in usability tests. Praised for clean visual hierarchy and intuitive gesture controls.',
     tools: ['Figma', 'Principle', 'Swift UI', 'Notion'],
-    color: 'from-blue-500/20 to-cyan-500/20',
+    accent: '#1ABCFE',
   },
   {
     id: 4,
@@ -50,7 +50,7 @@ const projects = [
     process: 'Redesigned the page hierarchy, wrote conversion-focused copy, added scroll-based animations and social proof sections.',
     outcome: 'Bounce rate reduced by 28% post-launch. Time on page increased by 40% with improved engagement metrics.',
     tools: ['Figma', 'React', 'Framer Motion', 'Tailwind CSS'],
-    color: 'from-emerald-500/20 to-teal-500/20',
+    accent: '#0ACF83',
   },
 ]
 
@@ -59,7 +59,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-32 px-6 relative">
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-600/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#1ABCFE]/4 rounded-full blur-[120px]" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -71,7 +71,7 @@ export default function Projects() {
           <motion.span
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-purple-400 text-sm font-medium tracking-widest uppercase"
+            className="text-[#F24E1E] text-sm font-medium tracking-widest uppercase"
           >
             Selected Work
           </motion.span>
@@ -79,10 +79,10 @@ export default function Projects() {
           <motion.h2
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-4"
+            className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-4 text-[#1E1E1E]"
           >
             Projects that{' '}
-            <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#A259FF] to-[#1ABCFE] bg-clip-text text-transparent">
               matter
             </span>
           </motion.h2>
@@ -90,7 +90,7 @@ export default function Projects() {
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-gray-400 text-lg max-w-xl mb-16"
+            className="text-[#636363] text-lg max-w-xl mb-16"
           >
             Case studies from real-world products — each one a story of problem-solving, design craft, and measurable outcomes.
           </motion.p>
@@ -109,20 +109,23 @@ export default function Projects() {
               variants={fadeUp}
               transition={{ duration: 0.5 }}
               whileHover={{ y: -3, transition: { duration: 0.2 } }}
-              className="group relative rounded-2xl border border-white/5 bg-white/[0.02] hover:border-purple-500/20 hover:bg-white/[0.04] transition-all overflow-hidden"
+              className="group relative rounded-2xl border border-gray-100 bg-white hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/60 transition-all overflow-hidden"
             >
               {/* Gradient accent */}
-              <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${p.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
+              <div
+                className="absolute top-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{ backgroundColor: p.accent }}
+              />
 
               <div className="p-6 sm:p-8">
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div>
-                    <span className="text-xs text-purple-400 font-medium tracking-wide uppercase">{p.tag}</span>
-                    <h3 className="font-display text-xl font-bold text-white mt-1">{p.name}</h3>
+                    <span className="text-xs font-medium tracking-wide uppercase" style={{ color: p.accent }}>{p.tag}</span>
+                    <h3 className="font-display text-xl font-bold text-[#1E1E1E] mt-1">{p.name}</h3>
                   </div>
                   <button
                     onClick={() => setExpanded(expanded === p.id ? null : p.id)}
-                    className="shrink-0 w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 transition-all cursor-pointer"
+                    className="shrink-0 w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-[#636363] hover:text-[#1E1E1E] hover:border-gray-300 transition-all cursor-pointer"
                     aria-label={expanded === p.id ? `Collapse ${p.name}` : `Expand ${p.name}`}
                   >
                     <HiOutlineArrowUpRight
@@ -131,14 +134,14 @@ export default function Projects() {
                   </button>
                 </div>
 
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">{p.summary}</p>
+                <p className="text-[#636363] text-sm leading-relaxed mb-4">{p.summary}</p>
 
                 {/* Tools */}
                 <div className="flex flex-wrap gap-2 mb-2">
                   {p.tools.map((t) => (
                     <span
                       key={t}
-                      className="px-3 py-1 text-xs font-medium text-gray-400 bg-white/5 rounded-full"
+                      className="px-3 py-1 text-xs font-medium text-[#636363] bg-gray-50 border border-gray-100 rounded-full"
                     >
                       {t}
                     </span>
@@ -155,18 +158,18 @@ export default function Projects() {
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="pt-4 mt-4 border-t border-white/5 space-y-3">
+                      <div className="pt-4 mt-4 border-t border-gray-100 space-y-3">
                         <div>
-                          <span className="text-xs text-purple-400 font-medium uppercase tracking-wide">Problem</span>
-                          <p className="text-gray-400 text-sm mt-1">{p.problem}</p>
+                          <span className="text-xs font-medium uppercase tracking-wide" style={{ color: p.accent }}>Problem</span>
+                          <p className="text-[#636363] text-sm mt-1">{p.problem}</p>
                         </div>
                         <div>
-                          <span className="text-xs text-purple-400 font-medium uppercase tracking-wide">Process</span>
-                          <p className="text-gray-400 text-sm mt-1">{p.process}</p>
+                          <span className="text-xs font-medium uppercase tracking-wide" style={{ color: p.accent }}>Process</span>
+                          <p className="text-[#636363] text-sm mt-1">{p.process}</p>
                         </div>
                         <div>
-                          <span className="text-xs text-purple-400 font-medium uppercase tracking-wide">Outcome</span>
-                          <p className="text-gray-400 text-sm mt-1">{p.outcome}</p>
+                          <span className="text-xs font-medium uppercase tracking-wide" style={{ color: p.accent }}>Outcome</span>
+                          <p className="text-[#636363] text-sm mt-1">{p.outcome}</p>
                         </div>
                       </div>
                     </motion.div>

@@ -51,7 +51,7 @@ const skillGroups = [
 export default function Resume() {
   return (
     <section id="resume" className="py-32 px-6 relative">
-      <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-purple-600/5 rounded-full blur-[120px]" />
+      <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-[#F24E1E]/4 rounded-full blur-[120px]" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -63,7 +63,7 @@ export default function Resume() {
           <motion.span
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-purple-400 text-sm font-medium tracking-widest uppercase"
+            className="text-[#A259FF] text-sm font-medium tracking-widest uppercase"
           >
             Resume
           </motion.span>
@@ -71,10 +71,10 @@ export default function Resume() {
           <motion.h2
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-4"
+            className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-4 text-[#1E1E1E]"
           >
             Experience &{' '}
-            <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#F24E1E] to-[#A259FF] bg-clip-text text-transparent">
               skills
             </span>
           </motion.h2>
@@ -82,7 +82,7 @@ export default function Resume() {
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-gray-400 text-lg max-w-xl mb-6"
+            className="text-[#636363] text-lg max-w-xl mb-6"
           >
             A snapshot of my professional journey, tools, and the skills I bring to every project.
           </motion.p>
@@ -92,12 +92,12 @@ export default function Resume() {
             <a
               href="/Nitin_Upadhyaya_Resume.pdf"
               download
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-full hover:shadow-lg hover:shadow-purple-500/25 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#1E1E1E] text-white font-medium rounded-full hover:shadow-lg hover:shadow-black/10 transition-all"
             >
               <HiOutlineArrowDownTray className="w-5 h-5" />
               Download Resume
             </a>
-            <p className="text-gray-600 text-xs mt-2">
+            <p className="text-[#999] text-xs mt-2">
               {/* PLACEHOLDER: Add your actual resume PDF to /public/Nitin_Upadhyaya_Resume.pdf */}
               PDF · Last updated 2024
             </p>
@@ -115,7 +115,7 @@ export default function Resume() {
           <motion.h3
             variants={fadeUp}
             transition={{ duration: 0.5 }}
-            className="font-display text-2xl font-bold mb-8"
+            className="font-display text-2xl font-bold mb-8 text-[#1E1E1E]"
           >
             Experience
           </motion.h3>
@@ -126,19 +126,19 @@ export default function Resume() {
                 key={exp.role + exp.company}
                 variants={fadeUp}
                 transition={{ duration: 0.5 }}
-                className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors"
+                className="p-6 rounded-2xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
                   <div>
-                    <h4 className="font-display font-semibold text-white">{exp.role}</h4>
-                    <p className="text-gray-500 text-sm">{exp.company}</p>
+                    <h4 className="font-display font-semibold text-[#1E1E1E]">{exp.role}</h4>
+                    <p className="text-[#636363] text-sm">{exp.company}</p>
                   </div>
-                  <span className="text-purple-400 text-sm font-medium shrink-0">{exp.period}</span>
+                  <span className="text-[#F24E1E] text-sm font-medium shrink-0">{exp.period}</span>
                 </div>
                 <ul className="space-y-1.5">
                   {exp.highlights.map((h, i) => (
-                    <li key={i} className="text-gray-400 text-sm flex gap-2">
-                      <span className="text-purple-500 mt-1.5 shrink-0">•</span>
+                    <li key={i} className="text-[#636363] text-sm flex gap-2">
+                      <span className="text-[#F24E1E] mt-1.5 shrink-0">•</span>
                       {h}
                     </li>
                   ))}
@@ -159,7 +159,7 @@ export default function Resume() {
           <motion.h3
             variants={fadeUp}
             transition={{ duration: 0.5 }}
-            className="font-display text-2xl font-bold mb-8"
+            className="font-display text-2xl font-bold mb-8 text-[#1E1E1E]"
           >
             Skills & Tools
           </motion.h3>
@@ -171,12 +171,12 @@ export default function Resume() {
                 variants={fadeUp}
                 transition={{ duration: 0.5 }}
               >
-                <h4 className="text-sm font-medium text-purple-400 uppercase tracking-wide mb-3">{g.category}</h4>
+                <h4 className="text-sm font-medium text-[#F24E1E] uppercase tracking-wide mb-3">{g.category}</h4>
                 <div className="flex flex-wrap gap-2">
                   {g.items.map((item) => (
                     <span
                       key={item}
-                      className="px-3 py-1.5 text-sm text-gray-300 bg-white/[0.04] border border-white/5 rounded-lg hover:border-purple-500/20 hover:bg-white/[0.06] transition-all"
+                      className="px-3 py-1.5 text-sm text-[#636363] bg-gray-50 border border-gray-100 rounded-lg hover:border-gray-200 hover:bg-gray-100 transition-all"
                     >
                       {item}
                     </span>
@@ -198,7 +198,7 @@ export default function Resume() {
           <motion.h3
             variants={fadeUp}
             transition={{ duration: 0.5 }}
-            className="font-display text-2xl font-bold mb-8"
+            className="font-display text-2xl font-bold mb-8 text-[#1E1E1E]"
           >
             Education
           </motion.h3>
@@ -206,12 +206,12 @@ export default function Resume() {
           <motion.div
             variants={fadeUp}
             transition={{ duration: 0.5 }}
-            className="p-6 rounded-2xl bg-white/[0.02] border border-white/5"
+            className="p-6 rounded-2xl bg-white border border-gray-100"
           >
             {/* PLACEHOLDER: Replace with actual education details from resume */}
-            <h4 className="font-display font-semibold text-white">Bachelor&apos;s Degree</h4>
-            <p className="text-gray-500 text-sm mt-1">University Name · Graduation Year</p>
-            <p className="text-gray-400 text-sm mt-2">
+            <h4 className="font-display font-semibold text-[#1E1E1E]">Bachelor&apos;s Degree</h4>
+            <p className="text-[#636363] text-sm mt-1">University Name · Graduation Year</p>
+            <p className="text-[#636363] text-sm mt-2">
               Relevant coursework in design, computer science, and human-computer interaction.
             </p>
           </motion.div>

@@ -12,21 +12,25 @@ const skills = [
     icon: <HiOutlineLightBulb className="w-6 h-6" />,
     title: 'Product Thinking',
     desc: 'Translating complex user needs into elegant, structured design decisions rooted in research and empathy.',
+    color: '#F24E1E',
   },
   {
     icon: <HiOutlineCube className="w-6 h-6" />,
     title: 'UI/UX Design',
     desc: 'Crafting pixel-perfect interfaces in Figma with strong visual hierarchy, consistency, and design systems.',
+    color: '#A259FF',
   },
   {
     icon: <HiOutlineCode className="w-6 h-6" />,
     title: 'Frontend Sensibility',
     desc: 'Bridging design and engineering — understanding component architecture, responsive layouts, and animation.',
+    color: '#1ABCFE',
   },
   {
     icon: <HiOutlineSparkles className="w-6 h-6" />,
     title: 'Smart Contracts',
     desc: 'Exploring decentralized application design with Solidity — from token systems to on-chain logic.',
+    color: '#0ACF83',
   },
 ]
 
@@ -41,7 +45,7 @@ const journey = [
 export default function About() {
   return (
     <section id="about" className="py-32 px-6 relative">
-      <div className="absolute top-0 left-1/2 w-[600px] h-[400px] -translate-x-1/2 bg-purple-600/5 rounded-full blur-[120px]" />
+      <div className="absolute top-0 left-1/2 w-[600px] h-[400px] -translate-x-1/2 bg-[#A259FF]/4 rounded-full blur-[120px]" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -53,7 +57,7 @@ export default function About() {
           <motion.span
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-purple-400 text-sm font-medium tracking-widest uppercase"
+            className="text-[#F24E1E] text-sm font-medium tracking-widest uppercase"
           >
             About Me
           </motion.span>
@@ -61,10 +65,10 @@ export default function About() {
           <motion.h2
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-6"
+            className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-6 text-[#1E1E1E]"
           >
             Designing with{' '}
-            <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#F24E1E] to-[#A259FF] bg-clip-text text-transparent">
               purpose
             </span>
           </motion.h2>
@@ -72,7 +76,7 @@ export default function About() {
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-gray-400 text-lg max-w-2xl leading-relaxed mb-16"
+            className="text-[#636363] text-lg max-w-2xl leading-relaxed mb-16"
           >
             I&apos;m a product-focused UI/UX designer who believes great design is invisible — it
             just works. I combine user empathy with systematic thinking to build interfaces
@@ -96,13 +100,16 @@ export default function About() {
               variants={fadeUp}
               transition={{ duration: 0.5 }}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="group p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-purple-500/20 hover:bg-white/[0.04] transition-all"
+              className="group p-6 rounded-2xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/50 transition-all"
             >
-              <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-purple-500/10 text-purple-400 mb-4 group-hover:bg-purple-500/20 transition-colors">
+              <div
+                className="w-11 h-11 flex items-center justify-center rounded-xl mb-4 transition-colors"
+                style={{ backgroundColor: `${s.color}15`, color: s.color }}
+              >
                 {s.icon}
               </div>
-              <h3 className="font-display font-semibold text-white mb-2">{s.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+              <h3 className="font-display font-semibold text-[#1E1E1E] mb-2">{s.title}</h3>
+              <p className="text-[#636363] text-sm leading-relaxed">{s.desc}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -117,14 +124,14 @@ export default function About() {
           <motion.h3
             variants={fadeUp}
             transition={{ duration: 0.5 }}
-            className="font-display text-2xl font-bold mb-8"
+            className="font-display text-2xl font-bold mb-8 text-[#1E1E1E]"
           >
             The Journey
           </motion.h3>
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-[19px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-purple-500/40 via-purple-500/20 to-transparent hidden sm:block" />
+            <div className="absolute left-[19px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-[#F24E1E]/40 via-[#A259FF]/20 to-transparent hidden sm:block" />
 
             <div className="space-y-6">
               {journey.map((item) => (
@@ -135,14 +142,14 @@ export default function About() {
                   className="flex gap-6 items-start"
                 >
                   <div className="hidden sm:flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-xs font-bold text-purple-400 shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-[#F24E1E]/10 border border-[#F24E1E]/30 flex items-center justify-center text-xs font-bold text-[#F24E1E] shrink-0">
                       {item.year}
                     </div>
                   </div>
-                  <div className="flex-1 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
-                    <span className="sm:hidden text-purple-400 text-xs font-bold">{item.year} · </span>
-                    <span className="font-medium text-white">{item.label}</span>
-                    <p className="text-gray-500 text-sm mt-1">{item.detail}</p>
+                  <div className="flex-1 p-4 rounded-xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all">
+                    <span className="sm:hidden text-[#F24E1E] text-xs font-bold">{item.year} · </span>
+                    <span className="font-medium text-[#1E1E1E]">{item.label}</span>
+                    <p className="text-[#636363] text-sm mt-1">{item.detail}</p>
                   </div>
                 </motion.div>
               ))}

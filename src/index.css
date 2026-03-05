@@ -3,16 +3,17 @@
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --color-primary: #8b5cf6;
-  --color-primary-light: #a78bfa;
-  --color-primary-dark: #7c3aed;
-  --color-accent: #6366f1;
-  --color-surface: #0a0a0f;
-  --color-surface-light: #12121a;
-  --color-surface-card: #16161f;
-  --color-text-primary: #f0f0f5;
-  --color-text-secondary: #9ca3af;
-  --color-border: #ffffff12;
+  --color-figma-orange: #F24E1E;
+  --color-figma-purple: #A259FF;
+  --color-figma-blue: #1ABCFE;
+  --color-figma-green: #0ACF83;
+  --color-figma-red: #FF7262;
+  --color-surface: #FFFFFF;
+  --color-surface-light: #F5F5F5;
+  --color-surface-card: #FFFFFF;
+  --color-text-primary: #1E1E1E;
+  --color-text-secondary: #636363;
+  --color-border: #E5E5E5;
 }
 
 html {
@@ -31,8 +32,8 @@ body {
 }
 
 ::selection {
-  background-color: #8b5cf660;
-  color: #fff;
+  background-color: #A259FF40;
+  color: #1E1E1E;
 }
 
 ::-webkit-scrollbar {
@@ -40,14 +41,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-surface);
+  background: #F5F5F5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #ccc;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #aaa;
 }
