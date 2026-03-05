@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nitin | UI/UX Designer</title>
+  <meta name="description" content="UI/UX Designer portfolio – crafting intuitive digital experiences." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f; --bg2: #111118; --bgc: #16161f;
+      --border: rgba(255,255,255,0.08);
+      --text: #e8e8f0; --muted: #8888a8;
+      --purple: #7c3aed; --purpleL: #a78bfa; --cyan: #06b6d4;
+      --font: 'Inter', system-ui, sans-serif;
+      --r8: 8px; --r16: 16px; --r24: 24px;
+      --nav: 72px; --t: 0.25s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 100px 0; }
+    .tag { display:inline-block; font-size:.75rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--purpleL); background:rgba(124,58,237,.12); border:1px solid rgba(124,58,237,.25); padding:4px 12px; border-radius:999px; margin-bottom:16px; }
+    .sec-title { font-size:clamp(1.8rem,3.5vw,2.5rem); font-weight:700; line-height:1.2; margin-bottom:16px; }
+    .sec-sub   { color:var(--muted); font-size:1.05rem; }
+    .sec-hdr   { text-align:center; max-width:600px; margin:0 auto 64px; }
+    .grad { background:linear-gradient(90deg,var(--purple),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .accent { color:var(--purpleL); }
+
+    /* Buttons */
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 28px; border-radius:var(--r8); font:600 .95rem var(--font); cursor:pointer; transition:var(--t); border:none; white-space:nowrap; }
+    .btn-primary   { background:linear-gradient(135deg,var(--purple),var(--cyan)); color:#fff; box-shadow:0 4px 20px rgba(124,58,237,.35); }
+    .btn-primary:hover  { transform:translateY(-2px); box-shadow:0 8px 28px rgba(124,58,237,.5); }
+    .btn-secondary { background:transparent; color:var(--text); border:1px solid var(--border); }
+    .btn-secondary:hover { border-color:var(--purpleL); color:var(--purpleL); }
+    .btn-outline   { background:transparent; color:var(--purpleL); border:1px solid rgba(124,58,237,.4); padding:9px 20px; font-size:.875rem; }
+    .btn-outline:hover { background:rgba(124,58,237,.1); }
+    .btn-full { width:100%; }
+
+    /* Navbar */
+    .navbar { position:fixed; top:0; left:0; right:0; z-index:100; height:var(--nav); display:flex; align-items:center; transition:background var(--t),border-bottom var(--t); }
+    .navbar.scrolled { background:rgba(10,10,15,.88); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+    .nav-wrap { max-width:1160px; width:100%; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo  { font-size:1.4rem; font-weight:800; letter-spacing:-.03em; }
+    .nav-links { display:flex; gap:36px; }
+    .nav-link  { font-size:.9rem; font-weight:500; color:var(--muted); transition:color var(--t); }
+    .nav-link:hover, .nav-link.active { color:var(--text); }
+    .burger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+    .burger span { display:block; width:24px; height:2px; background:var(--text); border-radius:2px; transition:var(--t); }
+    .burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity:0; }
+    .burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    /* Hero */
+    .hero { min-height:100vh; display:flex; align-items:center; padding:0 24px; padding-top:var(--nav); max-width:1160px; margin:0 auto; gap:60px; }
+    .hero-content { flex:1; max-width:560px; }
+    .hero-eye  { font-size:.75rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan); margin-bottom:20px; }
+    .hero-title { font-size:clamp(2.4rem,5vw,3.8rem); font-weight:800; line-height:1.1; letter-spacing:-.03em; margin-bottom:24px; }
+    .hero-sub  { font-size:1.1rem; color:var(--muted); line-height:1.7; margin-bottom:36px; max-width:460px; }
+    .hero-cta  { display:flex; gap:16px; flex-wrap:wrap; }
+    .hero-vis  { flex:1; position:relative; min-height:400px; display:flex; align-items:center; justify-content:center; }
+    .blob { position:absolute; width:380px; height:380px; border-radius:50%; background:radial-gradient(circle,rgba(124,58,237,.2) 0%,transparent 70%); filter:blur(40px); }
+    .hcard { position:absolute; background:var(--bgc); border:1px solid var(--border); border-radius:var(--r16); padding:20px; min-width:200px; box-shadow:0 4px 24px rgba(0,0,0,.4); animation:float 4s ease-in-out infinite; }
+    .hcard.c1{top:10%;left:5%;animation-delay:0s}
+    .hcard.c2{top:40%;right:5%;animation-delay:1.3s}
+    .hcard.c3{bottom:10%;left:15%;animation-delay:2.6s}
+    .dot{width:12px;height:12px;border-radius:50%;margin-bottom:12px}
+    .dot.g{background:#22c55e}.dot.p{background:#a78bfa}.dot.b{background:#38bdf8}
+    .ln{height:8px;border-radius:4px;background:rgba(255,255,255,.08);margin-bottom:8px}
+    .w90{width:90%}.w80{width:80%}.w70{width:70%}.w65{width:65%}.w60{width:60%}.w55{width:55%}.w50{width:50%}.w45{width:45%}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+    /* About */
+    .about{background:var(--bg2)}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .img-wrap{position:relative}
+    .img-ph{width:100%;aspect-ratio:1;max-width:420px;border-radius:var(--r24);overflow:hidden;background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(6,182,212,.1));border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+    .img-ph svg{width:60%;height:60%;opacity:.7}
+    .badge{position:absolute;bottom:-16px;right:-16px;background:linear-gradient(135deg,var(--purple),var(--cyan));border-radius:var(--r16);padding:16px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 24px rgba(124,58,237,.4)}
+    .badge-n{font-size:1.8rem;font-weight:800;color:#fff}
+    .badge-t{font-size:.8rem;font-weight:500;color:rgba(255,255,255,.85);line-height:1.3}
+    .about-text p{color:var(--muted);margin-bottom:16px;line-height:1.8}
+    .stats{display:flex;gap:36px;margin:32px 0;padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .stat-n{display:block;font-size:1.8rem;font-weight:800;background:linear-gradient(90deg,var(--purple),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .stat-l{font-size:.8rem;color:var(--muted);margin-top:2px}
+
+    /* Skills */
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+    .skill-card{background:var(--bgc);border:1px solid var(--border);border-radius:var(--r16);padding:28px;transition:transform var(--t),border-color var(--t)}
+    .skill-card:hover{transform:translateY(-4px);border-color:rgba(124,58,237,.4)}
+    .sk-icon{width:48px;height:48px;background:rgba(124,58,237,.12);border-radius:var(--r8);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--purpleL)}
+    .sk-icon svg{width:24px;height:24px}
+    .skill-card h3{font-size:1rem;font-weight:600;margin-bottom:8px}
+    .skill-card p{font-size:.875rem;color:var(--muted);line-height:1.7}
+    .tools-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:24px;background:var(--bgc);border:1px solid var(--border);border-radius:var(--r16)}
+    .tools-lbl{font-size:.85rem;font-weight:600;color:var(--muted);white-space:nowrap}
+    .chips{display:flex;gap:10px;flex-wrap:wrap}
+    .chip{font-size:.8rem;font-weight:500;padding:5px 14px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);border-radius:999px;color:var(--purpleL);transition:var(--t)}
+    .chip:hover{background:rgba(124,58,237,.2)}
+
+    /* Projects */
+    .projects{background:var(--bg2)}
+    .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+    .pcard{background:var(--bgc);border:1px solid var(--border);border-radius:var(--r24);overflow:hidden;transition:transform var(--t),border-color var(--t)}
+    .pcard:hover{transform:translateY(-6px);border-color:rgba(124,58,237,.4)}
+    .pcard.feat{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr}
+    .pimg{position:relative;min-height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .pcard.feat .pimg{min-height:320px}
+    .mockup{padding:24px}
+    .mscreen{background:rgba(0,0,0,.3);border-radius:12px;overflow:hidden;min-width:220px;backdrop-filter:blur(4px)}
+    .mbar{height:32px;background:rgba(0,0,0,.2);display:flex;align-items:center;padding:0 12px;gap:6px}
+    .mbar::before,.mbar::after{content:'';display:block;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3)}
+    .mcontent{padding:16px}
+    .mline{height:8px;border-radius:4px;background:rgba(255,255,255,.2);margin-bottom:10px}
+    .mblock{height:80px;border-radius:8px;background:rgba(255,255,255,.15);margin-top:12px}
+    .pinfo{padding:28px;display:flex;flex-direction:column;gap:12px}
+    .pmeta{display:flex;gap:8px;flex-wrap:wrap}
+    .ptag{font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--cyan);background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);padding:3px 10px;border-radius:999px}
+    .ptitle{font-size:1.2rem;font-weight:700;line-height:1.3}
+    .pdesc{font-size:.9rem;color:var(--muted);line-height:1.7}
+    .outcomes{display:flex;flex-wrap:wrap;gap:10px}
+    .outcome{font-size:.8rem;font-weight:500;color:var(--muted);background:rgba(255,255,255,.04);border:1px solid var(--border);padding:4px 12px;border-radius:6px}
+
+    /* Process */
+    .proc-steps{display:flex;align-items:flex-start}
+    .proc-step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 20px;background:var(--bgc);border:1px solid var(--border);border-radius:var(--r16)}
+    .proc-conn{width:60px;height:2px;background:linear-gradient(90deg,var(--purple),var(--cyan));flex-shrink:0;align-self:center;margin-top:-32px}
+    .step-num{font-size:2.5rem;font-weight:800;background:linear-gradient(90deg,var(--purple),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+    .step-body h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+    .step-body p{font-size:.875rem;color:var(--muted);line-height:1.6}
+
+    /* Testimonials */
+    .testi{background:var(--bg2)}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .tcard{background:var(--bgc);border:1px solid var(--border);border-radius:var(--r16);padding:28px;display:flex;flex-direction:column;gap:16px}
+    .stars{color:#fbbf24;letter-spacing:2px}
+    .tcard p{font-size:.925rem;color:var(--muted);line-height:1.75;flex:1;font-style:italic}
+    .tauthor{display:flex;align-items:center;gap:12px}
+    .ava{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;flex-shrink:0}
+    .av1{background:linear-gradient(135deg,#7c3aed,#a78bfa)}
+    .av2{background:linear-gradient(135deg,#0891b2,#06b6d4)}
+    .av3{background:linear-gradient(135deg,#be185d,#f43f5e)}
+    .tauthor strong{display:block;font-size:.875rem;font-weight:600}
+    .tauthor span{font-size:.775rem;color:var(--muted)}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+    .contact-info p{color:var(--muted);margin-bottom:32px;line-height:1.8}
+    .clinks{display:flex;flex-direction:column;gap:16px}
+    .clink{display:flex;align-items:center;gap:12px;font-size:.9rem;font-weight:500;color:var(--muted);transition:color var(--t)}
+    .clink svg{width:18px;height:18px;color:var(--purpleL);flex-shrink:0}
+    .clink:hover{color:var(--text)}
+    .cform{background:var(--bgc);border:1px solid var(--border);border-radius:var(--r24);padding:36px;display:flex;flex-direction:column;gap:20px}
+    .fg{display:flex;flex-direction:column;gap:6px}
+    .fg label{font-size:.85rem;font-weight:600;color:var(--muted)}
+    .fg input,.fg textarea,.fg select{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--r8);padding:12px 16px;font:.9rem var(--font);color:var(--text);outline:none;transition:border-color var(--t);resize:vertical}
+    .fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.2)}
+    .fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--purpleL)}
+    .fg select option{background:var(--bg2)}
+    .f-ok{text-align:center;font-size:.875rem;color:#22c55e;font-weight:500}
+
+    /* Footer */
+    footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0}
+    .foot-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .foot-logo{font-size:1.2rem;font-weight:800}
+    .foot-copy{font-size:.85rem;color:var(--muted)}
+    .foot-links{display:flex;gap:24px}
+    .foot-links a{font-size:.85rem;color:var(--muted);transition:color var(--t)}
+    .foot-links a:hover{color:var(--text)}
+
+    /* Reveal */
+    .reveal{opacity:0;transform:translateY(32px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* Responsive */
+    @media(max-width:1024px){
+      .skills-grid{grid-template-columns:repeat(2,1fr)}
+      .proc-steps{flex-wrap:wrap;gap:16px}
+      .proc-conn{display:none}
+      .proc-step{flex:1 1 45%}
+    }
+    @media(max-width:768px){
+      .section{padding:72px 0}
+      .nav-links{position:fixed;inset:var(--nav) 0 0 0;background:rgba(10,10,15,.97);backdrop-filter:blur(16px);flex-direction:column;align-items:center;justify-content:center;gap:40px;transform:translateX(100%);transition:transform var(--t)}
+      .nav-links.open{transform:translateX(0)}
+      .nav-link{font-size:1.2rem}
+      .burger{display:flex}
+      .hero{flex-direction:column;text-align:center;padding-top:calc(var(--nav) + 40px);min-height:auto;padding-bottom:60px}
+      .hero-content{max-width:100%}
+      .hero-sub{max-width:100%}
+      .hero-cta{justify-content:center}
+      .hero-vis{display:none}
+      .about-grid{grid-template-columns:1fr;gap:48px}
+      .img-wrap{max-width:320px;margin:0 auto}
+      .skills-grid{grid-template-columns:1fr}
+      .proj-grid{grid-template-columns:1fr}
+      .pcard.feat{grid-column:span 1;grid-template-columns:1fr}
+      .proc-step{flex:1 1 100%}
+      .testi-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr;gap:48px}
+      .foot-inner{flex-direction:column;text-align:center}
+    }
+    @media(max-width:480px){
+      .stats{gap:20px}
+      .cform{padding:24px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="nav-wrap">
+    <a href="#hero" class="nav-logo">Nitin<span class="accent">.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about"    class="nav-link">About</a></li>
+      <li><a href="#skills"   class="nav-link">Skills</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#contact"  class="nav-link">Contact</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <p class="hero-eye">UI/UX Designer</p>
+    <h1 class="hero-title">
+      Crafting <span class="grad">intuitive</span> &amp;<br>
+      <span class="grad">beautiful</span> experiences
+    </h1>
+    <p class="hero-sub">
+      I design user-centred digital products that solve real problems,
+      delight users, and drive measurable results.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#contact"  class="btn btn-secondary">Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-vis">
+    <div class="blob"></div>
+    <div class="hcard c1"><div class="dot g"></div><div class="ln w80"></div><div class="ln w60"></div></div>
+    <div class="hcard c2"><div class="dot p"></div><div class="ln w70"></div><div class="ln w50"></div></div>
+    <div class="hcard c3"><div class="dot b"></div><div class="ln w90"></div><div class="ln w65"></div></div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="img-wrap">
+        <div class="img-ph">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="80" r="45" fill="#a78bfa" opacity=".8"/>
+            <ellipse cx="100" cy="175" rx="65" ry="40" fill="#a78bfa" opacity=".6"/>
+          </svg>
+        </div>
+        <div class="badge">
+          <span class="badge-n">3+</span>
+          <span class="badge-t">Years of<br>Experience</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="tag">About Me</span>
+        <h2 class="sec-title">Turning ideas into<br>seamless user journeys</h2>
+        <p>Hi, I'm Nitin — a passionate UI/UX Designer with over 3 years of experience creating intuitive digital experiences. I bridge the gap between user needs and business goals through thoughtful design, deep research, and iterative prototyping.</p>
+        <p>My process is rooted in empathy. I start every project by understanding the people who will use it, then translate those insights into clean, functional, and visually compelling interfaces.</p>
+        <div class="stats">
+          <div><span class="stat-n">30+</span><span class="stat-l">Projects Completed</span></div>
+          <div><span class="stat-n">20+</span><span class="stat-l">Happy Clients</span></div>
+          <div><span class="stat-n">5&#9733;</span><span class="stat-l">Avg. Rating</span></div>
+        </div>
+        <a href="#contact" class="btn btn-primary">Work With Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="section" id="skills">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="tag">What I Do</span>
+      <h2 class="sec-title">Skills &amp; Tools</h2>
+      <p class="sec-sub">A toolkit built for creating exceptional user experiences from research to pixel-perfect delivery.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="sk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
+        <h3>User Research</h3>
+        <p>Interviews, surveys, usability tests, and competitive analysis to uncover user needs and pain points.</p>
+      </div>
+      <div class="skill-card">
+        <div class="sk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h3>Wireframing &amp; Prototyping</h3>
+        <p>Low-to-high fidelity wireframes and interactive prototypes that validate ideas before development.</p>
+      </div>
+      <div class="skill-card">
+        <div class="sk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 0 1 8 0"/><line x1="12" y1="8" x2="12" y2="12"/></svg></div>
+        <h3>Visual Design</h3>
+        <p>Clean, modern interfaces with strong typography, colour theory, and brand consistency.</p>
+      </div>
+      <div class="skill-card">
+        <div class="sk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg></div>
+        <h3>Interaction Design</h3>
+        <p>Micro-interactions, motion design, and transitions that make interfaces feel alive and responsive.</p>
+      </div>
+      <div class="skill-card">
+        <div class="sk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3>Design Systems</h3>
+        <p>Scalable component libraries and design tokens that enable consistent, maintainable products.</p>
+      </div>
+      <div class="skill-card">
+        <div class="sk-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>UX Strategy</h3>
+        <p>Aligning user goals with business objectives through journey mapping, personas, and service design.</p>
+      </div>
+    </div>
+    <div class="tools-row">
+      <span class="tools-lbl">Tools I use:</span>
+      <div class="chips">
+        <span class="chip">Figma</span>
+        <span class="chip">Adobe XD</span>
+        <span class="chip">Sketch</span>
+        <span class="chip">InVision</span>
+        <span class="chip">Maze</span>
+        <span class="chip">Zeplin</span>
+        <span class="chip">Miro</span>
+        <span class="chip">Notion</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="section projects" id="projects">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="tag">My Work</span>
+      <h2 class="sec-title">Featured Projects</h2>
+      <p class="sec-sub">A selection of UI/UX design projects spanning mobile apps, web platforms, and design systems.</p>
+    </div>
+    <div class="proj-grid">
+      <article class="pcard feat">
+        <div class="pimg" style="background:linear-gradient(135deg,#667eea,#764ba2)">
+          <div class="mockup"><div class="mscreen"><div class="mbar"></div><div class="mcontent"><div class="mline w70"></div><div class="mline w50"></div><div class="mblock"></div></div></div></div>
+        </div>
+        <div class="pinfo">
+          <div class="pmeta"><span class="ptag">Mobile App</span><span class="ptag">E-Commerce</span></div>
+          <h3 class="ptitle">ShopEase &#8212; Shopping App Redesign</h3>
+          <p class="pdesc">A complete UX overhaul of an e-commerce mobile app. Reduced checkout steps from 7 to 3, increasing conversion by 34%.</p>
+          <div class="outcomes"><span class="outcome">&#128200; 34% higher conversion</span><span class="outcome">&#11088; 4.8 App Store rating</span></div>
+          <a href="#contact" class="btn btn-outline">View Case Study &#8594;</a>
+        </div>
+      </article>
+      <article class="pcard">
+        <div class="pimg" style="background:linear-gradient(135deg,#f093fb,#f5576c)">
+          <div class="mockup"><div class="mscreen"><div class="mbar"></div><div class="mcontent"><div class="mline w90"></div><div class="mline w60"></div><div class="mblock"></div></div></div></div>
+        </div>
+        <div class="pinfo">
+          <div class="pmeta"><span class="ptag">Web Platform</span><span class="ptag">Dashboard</span></div>
+          <h3 class="ptitle">FinTrack &#8212; Finance Dashboard</h3>
+          <p class="pdesc">A data-dense finance dashboard designed for clarity. Complex data visualised with an accessible, clean design system.</p>
+          <a href="#contact" class="btn btn-outline">View Case Study &#8594;</a>
+        </div>
+      </article>
+      <article class="pcard">
+        <div class="pimg" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">
+          <div class="mockup"><div class="mscreen"><div class="mbar"></div><div class="mcontent"><div class="mline w80"></div><div class="mline w55"></div><div class="mblock"></div></div></div></div>
+        </div>
+        <div class="pinfo">
+          <div class="pmeta"><span class="ptag">Design System</span><span class="ptag">SaaS</span></div>
+          <h3 class="ptitle">Prism Design System</h3>
+          <p class="pdesc">Built a comprehensive design system with 150+ components, cutting designer-developer handoff time by 60%.</p>
+          <a href="#contact" class="btn btn-outline">View Case Study &#8594;</a>
+        </div>
+      </article>
+      <article class="pcard">
+        <div class="pimg" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">
+          <div class="mockup"><div class="mscreen"><div class="mbar"></div><div class="mcontent"><div class="mline w75"></div><div class="mline w45"></div><div class="mblock"></div></div></div></div>
+        </div>
+        <div class="pinfo">
+          <div class="pmeta"><span class="ptag">Mobile App</span><span class="ptag">Health</span></div>
+          <h3 class="ptitle">Wellbeing &#8212; Health &amp; Fitness App</h3>
+          <p class="pdesc">Designed an onboarding flow that reduced drop-off by 50% and an activity tracker that improved daily engagement.</p>
+          <a href="#contact" class="btn btn-outline">View Case Study &#8594;</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="section" id="process">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="tag">How I Work</span>
+      <h2 class="sec-title">My Design Process</h2>
+    </div>
+    <div class="proc-steps">
+      <div class="proc-step"><div class="step-num">01</div><div class="step-body"><h3>Discover</h3><p>Research users, stakeholders, and the competitive landscape to build a shared understanding.</p></div></div>
+      <div class="proc-conn"></div>
+      <div class="proc-step"><div class="step-num">02</div><div class="step-body"><h3>Define</h3><p>Synthesise insights into clear problem statements, personas, and design principles.</p></div></div>
+      <div class="proc-conn"></div>
+      <div class="proc-step"><div class="step-num">03</div><div class="step-body"><h3>Design</h3><p>Explore solutions through sketches, wireframes, and high-fidelity prototypes.</p></div></div>
+      <div class="proc-conn"></div>
+      <div class="proc-step"><div class="step-num">04</div><div class="step-body"><h3>Deliver</h3><p>Test with real users, iterate, and hand off polished specs to engineering.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testi" id="testimonials">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="tag">Kind Words</span>
+      <h2 class="sec-title">What Clients Say</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="tcard">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>&#8220;Nitin transformed our cluttered app into a clean, intuitive product. User satisfaction scores jumped by 40%.&#8221;</p>
+        <div class="tauthor"><div class="ava av1">SK</div><div><strong>Sarah K.</strong><span>Product Manager, TechStartup</span></div></div>
+      </div>
+      <div class="tcard">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>&#8220;The design system Nitin built has saved our team countless hours. It&#8217;s thorough, beautiful, and developers love it.&#8221;</p>
+        <div class="tauthor"><div class="ava av2">MR</div><div><strong>Marcus R.</strong><span>Engineering Lead, SaaS Co.</span></div></div>
+      </div>
+      <div class="tcard">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>&#8220;Working with Nitin felt like a true partnership. He asked the right questions and delivered something beyond our expectations.&#8221;</p>
+        <div class="tauthor"><div class="ava av3">PL</div><div><strong>Priya L.</strong><span>Founder, HealthApp</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="tag">Get In Touch</span>
+        <h2 class="sec-title">Let&#8217;s build something<br>great together</h2>
+        <p>Whether you have a project in mind or just want to say hi, my inbox is always open. I typically respond within 24 hours.</p>
+        <div class="clinks">
+          <a href="mailto:hello@nitin.design" class="clink">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            hello@nitin.design
+          </a>
+          <a href="https://linkedin.com/in/nitin" target="_blank" rel="noopener noreferrer" class="clink">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://dribbble.com/nitin" target="_blank" rel="noopener noreferrer" class="clink">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+            Dribbble
+          </a>
+        </div>
+      </div>
+      <form class="cform" id="cform" novalidate>
+        <div class="fg"><label for="cname">Your Name</label><input type="text" id="cname" name="name" placeholder="John Doe" required></div>
+        <div class="fg"><label for="cemail">Email Address</label><input type="email" id="cemail" name="email" placeholder="john@example.com" required></div>
+        <div class="fg">
+          <label for="cproject">Project Type</label>
+          <select id="cproject" name="project">
+            <option value="">Select a project type</option>
+            <option value="mobile">Mobile App Design</option>
+            <option value="web">Web Design</option>
+            <option value="design-system">Design System</option>
+            <option value="ux-audit">UX Audit</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="fg"><label for="cmsg">Message</label><textarea id="cmsg" name="message" rows="5" placeholder="Tell me about your project&#8230;" required></textarea></div>
+        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        <p class="f-ok" id="fok" hidden>&#10003; Thanks! I&#8217;ll get back to you within 24 hours.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container foot-inner">
+    <p class="foot-logo">Nitin<span class="accent">.</span></p>
+    <p class="foot-copy">&#169; 2026 Nitin. Designed with &#10084;&#65039; &amp; lots of &#9749;</p>
+    <div class="foot-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar   = document.getElementById('navbar');
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function onScroll() {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible');
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  window.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll(
+      '.hero-content,.hero-vis,.img-wrap,.about-text,.skill-card,.tools-row,.pcard,.proc-step,.tcard,.contact-info,.cform'
+    ).forEach(function (el) { el.classList.add('reveal'); });
+    onScroll();
+  });
+
+  // Mobile nav
+  var burger  = document.getElementById('burger');
+  var navList = document.getElementById('navLinks');
+  burger.addEventListener('click', function () {
+    burger.classList.toggle('open');
+    navList.classList.toggle('open');
+    document.body.style.overflow = navList.classList.contains('open') ? 'hidden' : '';
+  });
+  navList.querySelectorAll('.nav-link').forEach(function (l) {
+    l.addEventListener('click', function () {
+      burger.classList.remove('open');
+      navList.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Contact form
+  var form = document.getElementById('cform');
+  var fok  = document.getElementById('fok');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name  = form.name.value.trim();
+    var email = form.email.value.trim();
+    var msg   = form.message.value.trim();
+    if (!name || !email || !msg) { alert('Please fill in your name, email, and message.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
+    var btn = form.querySelector('button[type=submit]');
+    btn.textContent = 'Sending\u2026'; btn.disabled = true;
+    setTimeout(function () {
+      form.reset(); btn.textContent = 'Send Message'; btn.disabled = false;
+      fok.hidden = false; setTimeout(function () { fok.hidden = true; }, 5000);
+    }, 1200);
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 72, behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
