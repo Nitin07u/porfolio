@@ -77,6 +77,11 @@ function ShapeElement({ type, size, color }) {
   return null
 }
 
+function getRotationKeyframes(type) {
+  if (type === 'square') return [0, 45, 90, 135, 180]
+  return [0, 15, -10, 20, 0]
+}
+
 export default function FloatingShapes() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
@@ -88,7 +93,7 @@ export default function FloatingShapes() {
           animate={{
             y: [0, -30, 10, -20, 0],
             x: [0, 15, -10, 20, 0],
-            rotate: [0, shape.type === 'square' ? 45 : 15, shape.type === 'square' ? 90 : -10, shape.type === 'square' ? 135 : 20, shape.type === 'square' ? 180 : 0],
+            rotate: getRotationKeyframes(shape.type),
             scale: [1, 1.08, 0.95, 1.05, 1],
           }}
           transition={{

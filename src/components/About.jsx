@@ -104,7 +104,7 @@ export default function About() {
             >
               <div
                 className="w-11 h-11 flex items-center justify-center rounded-xl mb-4 transition-colors"
-                style={{ backgroundColor: `${s.color}15`, color: s.color }}
+                style={{ backgroundColor: `${s.color}26`, color: s.color }}
               >
                 {s.icon}
               </div>
