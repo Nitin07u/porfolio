@@ -1,48 +1,46 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { HiOutlineLightBulb, HiOutlineCube, HiOutlineSparkles } from 'react-icons/hi2'
 import { HiOutlineCode } from 'react-icons/hi'
+import { supabase } from '../lib/supabase'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0 },
 }
 
-const skills = [
-  {
-    icon: <HiOutlineLightBulb className="w-6 h-6" />,
-    title: 'Product Thinking',
-    desc: 'Translating complex user needs into elegant, structured design decisions rooted in research and empathy.',
-    color: '#F24E1E',
-  },
-  {
-    icon: <HiOutlineCube className="w-6 h-6" />,
-    title: 'UI/UX Design',
-    desc: 'Crafting pixel-perfect interfaces in Figma with strong visual hierarchy, consistency, and design systems.',
-    color: '#A259FF',
-  },
-  {
-    icon: <HiOutlineCode className="w-6 h-6" />,
-    title: 'Frontend Sensibility',
-    desc: 'Bridging design and engineering — understanding component architecture, responsive layouts, and animation.',
-    color: '#1ABCFE',
-  },
-  {
-    icon: <HiOutlineSparkles className="w-6 h-6" />,
-    title: 'Smart Contracts',
-    desc: 'Exploring decentralized application design with Solidity — from token systems to on-chain logic.',
-    color: '#0ACF83',
-  },
-]
-
-const journey = [
-  { year: '2021', label: 'Started designing', detail: 'Discovered UI/UX through self-learning and design challenges' },
-  { year: '2022', label: 'First real project', detail: 'Designed and shipped a production app for a real client' },
-  { year: '2023', label: 'Product focus', detail: 'Shifted to product thinking — user research, flows, and strategy' },
-  { year: '2024', label: 'Solidity + Web3', detail: 'Expanded into smart contract development and dApp interfaces' },
-  { year: 'Now', label: 'Building & growing', detail: 'Designing products, shipping code, and crafting experiences' },
-]
+const ICON_MAP = {
+  HiOutlineLightBulb: <HiOutlineLightBulb className="w-6 h-6" />,
+  HiOutlineCube: <HiOutlineCube className="w-6 h-6" />,
+  HiOutlineCode: <HiOutlineCode className="w-6 h-6" />,
+  HiOutlineSparkles: <HiOutlineSparkles className="w-6 h-6" />,
+}
 
 export default function About() {
+  const [skills, setSkills] = useState([])
+  const [journey, setJourney] = useState([])
+  const [bio, setBio] = useState('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [skillsRes, journeyRes, profileRes] = await Promise.all([
+          supabase.from('skills').select('*').order('order_index', { ascending: true }),
+          supabase.from('journey').select('*').order('order_index', { ascending: true }),
+          supabase.from('profile').select('bio').single()
+        ])
+
+        if (skillsRes.data) setSkills(skillsRes.data)
+        if (journeyRes.data) setJourney(journeyRes.data)
+        if (profileRes.data) setBio(profileRes.data.bio)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
+
   return (
     <section id="about" className="py-32 px-6 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 w-[600px] h-[400px] -translate-x-1/2 bg-[#A259FF]/4 rounded-full blur-[120px]" />
@@ -78,11 +76,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="text-[#636363] text-lg max-w-2xl leading-relaxed mb-16"
           >
-            I&apos;m a product-focused UI/UX designer who believes great design is invisible — it
-            just works. I combine user empathy with systematic thinking to build interfaces
-            that are both beautiful and functional. Beyond design, I explore smart contract
-            development with Solidity, giving me a unique perspective on building
-            for decentralized systems.
+            {loading ? 'Loading bio...' : bio || "I'm a product-focused UI/UX designer who believes great design is invisible — it just works. I combine user empathy with systematic thinking to build interfaces that are both beautiful and functional. Beyond design, I explore smart contract development with Solidity, giving me a unique perspective on building for decentralized systems."}
           </motion.p>
         </motion.div>
 
@@ -94,24 +88,30 @@ export default function About() {
           variants={{ show: { transition: { staggerChildren: 0.08 } } }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20"
         >
-          {skills.map((s) => (
-            <motion.div
-              key={s.title}
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="group p-6 rounded-2xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/50 transition-all"
-            >
-              <div
-                className="w-11 h-11 flex items-center justify-center rounded-xl mb-4 transition-colors"
-                style={{ backgroundColor: `${s.color}26`, color: s.color }}
+          {loading ? (
+             [1,2,3,4].map(i => (
+              <div key={i} className="h-40 rounded-2xl bg-gray-50 animate-pulse border border-gray-100" />
+             ))
+          ) : (
+            skills.map((s) => (
+              <motion.div
+                key={s.id || s.title}
+                variants={fadeUp}
+                transition={{ duration: 0.5 }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="group p-6 rounded-2xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/50 transition-all"
               >
-                {s.icon}
-              </div>
-              <h3 className="font-display font-semibold text-[#1E1E1E] mb-2">{s.title}</h3>
-              <p className="text-[#636363] text-sm leading-relaxed">{s.desc}</p>
-            </motion.div>
-          ))}
+                <div
+                  className="w-11 h-11 flex items-center justify-center rounded-xl mb-4 transition-colors"
+                  style={{ backgroundColor: `${s.color || '#F24E1E'}26`, color: s.color || '#F24E1E' }}
+                >
+                  {ICON_MAP[s.icon_name] || <HiOutlineLightBulb className="w-6 h-6" />}
+                </div>
+                <h3 className="font-display font-semibold text-[#1E1E1E] mb-2">{s.title}</h3>
+                <p className="text-[#636363] text-sm leading-relaxed">{s.description || s.desc}</p>
+              </motion.div>
+            ))
+          )}
         </motion.div>
 
         {/* Journey Timeline */}
@@ -134,25 +134,31 @@ export default function About() {
             <div className="absolute left-[19px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-[#F24E1E]/40 via-[#A259FF]/20 to-transparent hidden sm:block" />
 
             <div className="space-y-6">
-              {journey.map((item) => (
-                <motion.div
-                  key={item.year}
-                  variants={fadeUp}
-                  transition={{ duration: 0.5 }}
-                  className="flex gap-6 items-start"
-                >
-                  <div className="hidden sm:flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-[#F24E1E]/10 border border-[#F24E1E]/30 flex items-center justify-center text-xs font-bold text-[#F24E1E] shrink-0">
-                      {item.year}
+              {loading ? (
+                [1,2,3].map(i => (
+                  <div key={i} className="h-20 rounded-xl bg-gray-50 animate-pulse border border-gray-100" />
+                ))
+              ) : (
+                journey.map((item) => (
+                  <motion.div
+                    key={item.id || item.year}
+                    variants={fadeUp}
+                    transition={{ duration: 0.5 }}
+                    className="flex gap-6 items-start"
+                  >
+                    <div className="hidden sm:flex flex-col items-center">
+                      <div className="w-10 h-10 rounded-full bg-[#F24E1E]/10 border border-[#F24E1E]/30 flex items-center justify-center text-xs font-bold text-[#F24E1E] shrink-0">
+                        {item.year}
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex-1 p-4 rounded-xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all">
-                    <span className="sm:hidden text-[#F24E1E] text-xs font-bold">{item.year} · </span>
-                    <span className="font-medium text-[#1E1E1E]">{item.label}</span>
-                    <p className="text-[#636363] text-sm mt-1">{item.detail}</p>
-                  </div>
-                </motion.div>
-              ))}
+                    <div className="flex-1 p-4 rounded-xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all">
+                      <span className="sm:hidden text-[#F24E1E] text-xs font-bold">{item.year} · </span>
+                      <span className="font-medium text-[#1E1E1E]">{item.label}</span>
+                      <p className="text-[#636363] text-sm mt-1">{item.detail}</p>
+                    </div>
+                  </motion.div>
+                ))
+              )}
             </div>
           </div>
         </motion.div>

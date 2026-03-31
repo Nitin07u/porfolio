@@ -1,110 +1,156 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { HiArrowDown, HiOutlineDocumentText } from 'react-icons/hi'
 import { HiOutlineEnvelope } from 'react-icons/hi2'
-
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } },
-}
+import { supabase } from '../lib/supabase'
+import { AnimatedText } from './AnimatedText'
+import MagneticButton from './MagneticButton'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 }
 
 export default function Hero() {
+  const [profile, setProfile] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchProfile() {
+      try {
+        const { data, error } = await supabase
+          .from('profile')
+          .select('name, roles, tagline')
+          .single()
+        
+        if (data) setProfile(data)
+        if (error) console.error('Error fetching profile:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProfile()
+  }, [])
+
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+
+  // Fallback values
+  const name = profile?.name || 'Nitin Upadhyaya'
+  const roles = profile?.roles?.join(' · ') || 'UI/UX Designer · Product Thinker · Solidity'
+  const tagline = profile?.tagline || 'I design thoughtful digital products that merge intuitive interfaces, product strategy, and technical precision — from pixel-perfect UIs to smart contract systems.'
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#F24E1E]/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#A259FF]/5 rounded-full blur-[100px]" />
-        <div className="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-[#1ABCFE]/4 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: 'radial-gradient(circle at 1px 1px, #ccc 1px, transparent 0)',
-            backgroundSize: '40px 40px',
-          }}
-        />
+      
+      {/* Background Orbs overrides */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(242,78,30,0.05)_0%,rgba(0,0,0,0)_70%)] -translate-x-1/2 -translate-y-1/2 pointer-events-none blur-[60px]" />
       </div>
 
       <motion.div
-        variants={container}
         initial="hidden"
         animate="show"
+        variants={{
+          hidden: {},
+          show: { transition: { staggerChildren: 0.15, delayChildren: 0.2 } }
+        }}
         className="relative z-10 max-w-4xl mx-auto px-6 text-center"
       >
-        <motion.div variants={fadeUp} className="mb-6">
-          <span className="inline-block px-4 py-1.5 text-xs font-medium tracking-widest uppercase text-[#F24E1E] border border-[#F24E1E]/20 rounded-full bg-[#F24E1E]/5">
-            UI/UX Designer · Product Thinker · Solidity
+        <motion.div variants={fadeUp} className="mb-8">
+          <span className="inline-block px-5 py-2 text-xs font-semibold tracking-widest uppercase text-[#A259FF] border border-[#A259FF]/20 rounded-full bg-[#A259FF]/5 backdrop-blur-md shadow-[0_0_20px_rgba(162,89,255,0.15)] glow-text">
+            {loading ? 'Initializing...' : roles}
           </span>
         </motion.div>
 
-        <motion.h1
-          variants={fadeUp}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]"
-        >
-          <span className="text-[#1E1E1E]">Nitin</span>{' '}
-          <span className="bg-gradient-to-r from-[#F24E1E] via-[#A259FF] to-[#1ABCFE] bg-clip-text text-transparent">
-            Upadhyaya
-          </span>
-        </motion.h1>
-
-        <motion.p
-          variants={fadeUp}
-          className="mt-6 text-lg sm:text-xl text-[#636363] max-w-2xl mx-auto leading-relaxed"
-        >
-          I design thoughtful digital products that merge intuitive interfaces,
-          product strategy, and technical precision — from pixel-perfect UIs to smart contract systems.
-        </motion.p>
-
-        <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <button
-            onClick={() => scrollTo('projects')}
-            className="group relative px-7 py-3.5 bg-[#1E1E1E] text-white font-medium rounded-full overflow-hidden transition-all hover:shadow-lg hover:shadow-black/10 cursor-pointer"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              View Projects
-              <HiArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+        {!loading && (
+          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] drop-shadow-2xl">
+            <span className="text-[#EAEAEA]">Nitin </span>
+            <span 
+              className="bg-clip-text text-transparent inline-block glow-text"
+              style={{
+                backgroundImage: 'linear-gradient(270deg, #F24E1E, #A259FF, #1ABCFE, #F24E1E)',
+                backgroundSize: '300% 300%',
+                animation: 'gradientShift 8s ease-in-out infinite'
+              }}
+            >
+              Upadhyaya
             </span>
-          </button>
+          </h1>
+        )}
 
-          <button
-            onClick={() => scrollTo('contact')}
-            className="px-7 py-3.5 border border-gray-300 text-[#1E1E1E] font-medium rounded-full hover:bg-gray-50 hover:border-gray-400 transition-all flex items-center gap-2 cursor-pointer"
+        {loading && (
+           <h1 className="font-display text-6xl md:text-8xl font-bold tracking-tight mb-4 text-[#EAEAEA]/20 animate-pulse">
+            Loading...
+          </h1>
+        )}
+
+        <div className="mt-8 mb-12">
+          {!loading && (
+            <AnimatedText 
+              text={tagline}
+              className="text-lg sm:text-xl md:text-2xl text-[#8A8A8A] max-w-3xl mx-auto leading-relaxed"
+              delay={0.8}
+            />
+          )}
+        </div>
+
+        <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-5 mt-4">
+          <MagneticButton
+            onClick={() => scrollTo('projects')}
+            className="group px-8 py-4 bg-[#EAEAEA] text-[#0A0A0B] font-semibold tracking-wide shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(242,78,30,0.3)] hover:scale-105"
           >
-            <HiOutlineEnvelope className="w-4 h-4" />
-            Contact Me
-          </button>
+            <span className="flex items-center gap-2">
+              Explore Work
+              <HiArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+            </span>
+          </MagneticButton>
+
+          <MagneticButton
+            onClick={() => scrollTo('contact')}
+            className="px-8 py-4 border border-white/10 text-white font-medium hover:bg-white/5 hover:border-white/20 hover:scale-105 glass-panel"
+          >
+            <span className="flex items-center gap-2">
+              <HiOutlineEnvelope className="w-5 h-5 text-[#A259FF]" />
+              Contact Me
+            </span>
+          </MagneticButton>
 
           <a
             href="#resume"
             onClick={(e) => { e.preventDefault(); scrollTo('resume'); }}
-            className="px-7 py-3.5 text-[#636363] hover:text-[#1E1E1E] font-medium rounded-full hover:bg-gray-50 transition-all flex items-center gap-2"
+            className="text-[#8A8A8A] hover:text-white font-medium px-4 py-2 transition-colors flex items-center gap-2 group relative"
           >
-            <HiOutlineDocumentText className="w-4 h-4" />
+            <HiOutlineDocumentText className="w-5 h-5 text-[#1ABCFE] group-hover:scale-110 transition-transform" />
             Resume
+            <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#1ABCFE] to-transparent scale-x-0 group-hover:scale-x-100 transition-transform origin-center" />
           </a>
         </motion.div>
 
         {/* Scroll indicator */}
         <motion.div
           variants={fadeUp}
-          className="mt-20"
+          className="mt-24 sm:mt-32"
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="inline-flex flex-col items-center gap-2 text-[#636363] text-xs tracking-widest uppercase"
-          >
-            <span>Scroll</span>
-            <div className="w-[1px] h-8 bg-gradient-to-b from-[#636363] to-transparent" />
-          </motion.div>
+          <div className="inline-flex flex-col items-center gap-4 text-[#636363] text-xs font-medium tracking-[0.2em] uppercase">
+            <span className="opacity-60">Scroll to discover</span>
+            <div className="w-[1px] h-12 bg-white/10 relative overflow-hidden">
+              <motion.div 
+                className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-[#A259FF] to-transparent"
+                animate={{ y: ['-100%', '200%'] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+              />
+            </div>
+          </div>
         </motion.div>
       </motion.div>
+      
+      <style>{`
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
     </section>
   )
 }
